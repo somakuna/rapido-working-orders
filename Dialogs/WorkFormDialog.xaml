@@ -1,0 +1,381 @@
+<Window x:Class="RapidoWorkingOrders.Dialogs.WorkFormDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Radni nalog"
+        Width="1500" Height="900" MinWidth="1000" MinHeight="800"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/logo.ico">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ══ Header ══ -->
+        <Border Grid.Row="0" Background="{StaticResource BrandBrush}" Padding="20,14">
+            <TextBlock x:Name="FormTitleText"
+                       FontSize="16" FontWeight="Bold" Foreground="White"
+                       VerticalAlignment="Center" />
+        </Border>
+
+        <!-- ══ Dva stupca ══ -->
+        <Grid Grid.Row="1" Margin="14,12,14,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ── Lijevi stupac: Opće informacije + Završna obrada ── -->
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <!-- Opće informacije -->
+                    <Border Margin="0,0,0,10" BorderBrush="#D8D8DE" BorderThickness="1" CornerRadius="5">
+                        <StackPanel>
+                            <Border Background="#F4F4F8" BorderBrush="#D8D8DE" BorderThickness="0,0,0,1"
+                                    Padding="14,8" CornerRadius="5,5,0,0">
+                                <TextBlock Text="Opće informacije" FontWeight="SemiBold" FontSize="12"
+                                           Foreground="{StaticResource BrandBrush}" />
+                            </Border>
+
+                            <Grid Margin="14,12,14,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="12" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Row 0: Broj naloga + Godina | Datum naloga -->
+                                <Grid Grid.Row="0" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="76" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Broj naloga" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                        <TextBox x:Name="WorkNumberBox" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Godina" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                        <TextBox x:Name="WorkYearBox" IsReadOnly="True"
+                                                 Background="#F0F0F3" Foreground="#777" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Grid.Row="0" Grid.Column="2">
+                                    <TextBlock Text="Datum naloga" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <DatePicker x:Name="WorkDatePicker" />
+                                </StackPanel>
+
+                                <!-- Row 2: Klijent | Operater -->
+                                <StackPanel Grid.Row="2" Grid.Column="0">
+                                    <TextBlock Text="Klijent" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <ComboBox x:Name="ClientCombo"
+                                              DisplayMemberPath="Name" SelectedValuePath="Id" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="2">
+                                    <TextBlock Text="Operater" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <ComboBox x:Name="UserCombo"
+                                              DisplayMemberPath="Name" SelectedValuePath="Id" />
+                                </StackPanel>
+
+                                <!-- Row 4: Ponuda br. | Narudžba via -->
+                                <StackPanel Grid.Row="4" Grid.Column="0">
+                                    <TextBlock Text="Ponuda br." FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <TextBox x:Name="OfferNumberBox" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="4" Grid.Column="2">
+                                    <TextBlock Text="Narudžba via" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <ComboBox x:Name="OrderMethodCombo">
+                                        <ComboBoxItem Content="" />
+                                        <ComboBoxItem Content="email" />
+                                        <ComboBoxItem Content="faks" />
+                                        <ComboBoxItem Content="osobno" />
+                                        <ComboBoxItem Content="telefon" />
+                                        <ComboBoxItem Content="web" />
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <!-- Row 6: Datum narudžbe | Datum isporuke -->
+                                <StackPanel Grid.Row="6" Grid.Column="0">
+                                    <TextBlock Text="Datum narudžbe" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <DatePicker x:Name="OrderDatePicker" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="6" Grid.Column="2">
+                                    <TextBlock Text="Datum isporuke" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <DatePicker x:Name="DeliveryDatePicker" />
+                                </StackPanel>
+
+                                <!-- Row 8: Lokacija | Isporuka -->
+                                <StackPanel Grid.Row="8" Grid.Column="0">
+                                    <TextBlock Text="Lokacija" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <TextBox x:Name="LocationBox" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="8" Grid.Column="2">
+                                    <TextBlock Text="Isporuka" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <TextBox x:Name="DeliveryBox" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Završna obrada -->
+                    <Border BorderBrush="#D8D8DE" BorderThickness="1" CornerRadius="5">
+                        <StackPanel>
+                            <Border Background="#F4F4F8" BorderBrush="#D8D8DE" BorderThickness="0,0,0,1"
+                                    Padding="14,8" CornerRadius="5,5,0,0">
+                                <TextBlock Text="Završna obrada" FontWeight="SemiBold" FontSize="12"
+                                           Foreground="{StaticResource BrandBrush}" />
+                            </Border>
+
+                            <ItemsControl x:Name="FinishingOptionsPanel" Margin="10,8,10,10">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0,0,0,4" Padding="10,6"
+                                                CornerRadius="4"
+                                                BorderThickness="1" BorderBrush="#D8D8DE"
+                                                Background="White">
+                                            <CheckBox Content="{Binding Name}"
+                                                      IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                      Padding="4,0,0,0">
+                                                <CheckBox.Style>
+                                                    <Style TargetType="CheckBox"
+                                                           BasedOn="{StaticResource {x:Type CheckBox}}">
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                                <Setter Property="Foreground"
+                                                                        Value="{StaticResource BrandBrush}" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </CheckBox.Style>
+                                            </CheckBox>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ── Desni stupac: Stavke ── -->
+            <Border Grid.Column="2" BorderBrush="#D8D8DE" BorderThickness="1" CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="#F4F4F8" BorderBrush="#D8D8DE" BorderThickness="0,0,0,1"
+                            Padding="14,8" CornerRadius="5,5,0,0">
+                        <TextBlock Text="Stavke  (drag &amp; drop PDF-ova)"
+                                   FontWeight="SemiBold" FontSize="12"
+                                   Foreground="{StaticResource BrandBrush}" />
+                    </Border>
+
+                    <Grid Grid.Row="1" Margin="10,8,10,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- DataGrid -->
+                        <DataGrid x:Name="FilesGrid" Grid.Row="0"
+                                  AllowDrop="True"
+                                  Drop="FilesGrid_Drop"
+                                  DragOver="FilesGrid_DragOver"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  KeyDown="FilesGrid_KeyDown"
+                                  ContextMenuOpening="FilesGrid_ContextMenuOpening"
+                                  SelectionMode="Single" SelectionUnit="FullRow"
+                                  RowBackground="White"
+                                  AlternatingRowBackground="#FAFAFA"
+                                  GridLinesVisibility="Horizontal"
+                                  HorizontalGridLinesBrush="#EFEFEF"
+                                  BorderBrush="#D1D1D6" BorderThickness="1"
+                                  RowHeaderWidth="0"
+                                  ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="📋  Dupliciraj stavku" Click="DuplicateRow_Click" />
+                                    <MenuItem Header="🗑️  Obriši stavku" Click="RemoveRow_Click" />
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Header="Stavka"
+                                                    Binding="{Binding Filename, UpdateSourceTrigger=LostFocus}"
+                                                    Width="*" MinWidth="100" />
+
+                                <DataGridTemplateColumn Header="Tehnologija" Width="130">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding TechnologyName}"
+                                                       VerticalAlignment="Center" Padding="6,0" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedValue="{Binding TechnologyId, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValuePath="Id"
+                                                      DisplayMemberPath="Name"
+                                                      ItemsSource="{Binding DataContext.Technologies,
+                                                          RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                      VerticalContentAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Materijal" Width="130">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MaterialName}"
+                                                       VerticalAlignment="Center" Padding="6,0" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedValue="{Binding MaterialId, UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedValuePath="Id"
+                                                      DisplayMemberPath="Name"
+                                                      ItemsSource="{Binding DataContext.Materials,
+                                                          RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                      VerticalContentAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="Napomena"
+                                                    Binding="{Binding Note, UpdateSourceTrigger=LostFocus}"
+                                                    Width="120" />
+
+                                <DataGridTextColumn Header="Str."
+                                                    Binding="{Binding PageCount, UpdateSourceTrigger=LostFocus}"
+                                                    Width="48" />
+
+                                <DataGridTextColumn Header="m²"
+                                                    Binding="{Binding M2, StringFormat=F2, UpdateSourceTrigger=LostFocus}"
+                                                    Width="70" />
+
+                                <DataGridTextColumn Header="Kol."
+                                                    Binding="{Binding Amount, StringFormat=F3, UpdateSourceTrigger=LostFocus}"
+                                                    Width="60" />
+
+                                <DataGridTextColumn Header="Uk.m²"
+                                                    Binding="{Binding TotalM2, StringFormat=F2}"
+                                                    Width="76" IsReadOnly="True" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- Totali — kolone poravnate s DataGridom -->
+                        <Border Grid.Row="1" Background="#F2F2F5"
+                                BorderBrush="#D1D1D6" BorderThickness="1,0,1,1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="76" />
+                                    <ColumnDefinition Width="18" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="UKUPNO" FontWeight="Bold" FontSize="11"
+                                           Foreground="{StaticResource BrandBrush}"
+                                           Padding="4,5" VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Column="4" x:Name="TotalPagesText"
+                                           Text="0" FontWeight="Bold" FontSize="11"
+                                           TextAlignment="Right" Padding="0,5,4,5"
+                                           VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Column="5" x:Name="TotalM2Text"
+                                           Text="0.00" FontWeight="Bold" FontSize="11"
+                                           TextAlignment="Right" Padding="0,5,4,5"
+                                           VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Column="6" x:Name="TotalAmountText"
+                                           Text="0.000" FontWeight="Bold" FontSize="11"
+                                           TextAlignment="Right" Padding="0,5,4,5"
+                                           VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Column="7" x:Name="TotalTotalM2Text"
+                                           Text="0.00" FontWeight="Bold" FontSize="11"
+                                           TextAlignment="Right" Padding="0,5,4,5"
+                                           Foreground="{StaticResource BrandBrush}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Akcije za stavke -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button Content="➕  Dodaj red" Click="AddRow_Click" Padding="10,6" />
+                            <Button Content="📂  Dodaj PDF-ove" Click="AddPdfFiles_Click"
+                                    Padding="10,6" Margin="8,0,0,0" />
+                            <Button Content="📋  Dupliciraj stavku" Click="DuplicateRow_Click"
+                                    Padding="10,6" Margin="8,0,0,0" />
+                            <Button Content="🗑️  Ukloni red" Click="RemoveRow_Click"
+                                    Padding="10,6" Margin="8,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <!-- ══ Gumbi na dnu ══ -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#D8D8DE" BorderThickness="0,1,0,0"
+                Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" x:Name="FormInfoText"
+                           Foreground="{StaticResource SecondaryTextBrush}"
+                           VerticalAlignment="Center" FontSize="12" />
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Content="Odustani" Click="Cancel_Click"
+                            Padding="14,7" MinWidth="100" />
+                    <Button Content="💾  Spremi" Click="Save_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Padding="14,7" MinWidth="110" Margin="10,0,0,0" />
+                    <Button Content="💾  Spremi i Print" Click="SaveAndPrint_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            Padding="14,7" MinWidth="140" Margin="8,0,0,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

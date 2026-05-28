@@ -1,0 +1,11 @@
+bin/
+obj/
+publish/
+Releases/
+
+.vs/
+*.user
+*.suo
+
+*.env
+.rapido_working_orders.json

@@ -1,0 +1,44 @@
+<Window x:Class="RapidoWorkingOrders.Dialogs.PrintPreviewDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Print / PDF"
+        Width="500" SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/logo.ico">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="TitleText"
+                   FontSize="14" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Grid.Row="1" Text="Odaberite format i akciju:"
+                   Foreground="#6C6C70" />
+
+        <!-- Format papira -->
+        <GroupBox Grid.Row="3" Header="Format papira">
+            <StackPanel Orientation="Horizontal" Margin="4">
+                <RadioButton x:Name="RbA4" Content="A4" IsChecked="True" Margin="0,0,20,0" />
+                <RadioButton x:Name="RbA5" Content="A5" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Akcije -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <Button Content="📄  Otvori PDF" Click="OpenPdf_Click"
+                    Style="{StaticResource PrimaryButton}"
+                    Padding="14,8" MinWidth="130" />
+            <Button Content="💾  Spremi PDF" Click="SavePdf_Click"
+                    Padding="14,8" MinWidth="130" Margin="10,0,0,0" />
+            <Button Content="Zatvori" Click="Close_Click"
+                    Padding="14,8" Margin="10,0,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>

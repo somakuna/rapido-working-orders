@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>RapidoWorkingOrders</RootNamespace>
+    <AssemblyName>RapidoWorkingOrders</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Authors>Rapido</Authors>
+    <Product>Rapido Working Orders</Product>
+    <StartupObject>RapidoWorkingOrders.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Entity Framework Core - ORM -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <!-- MySQL provider -->
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+
+    <!-- PDF generator -->
+    <PackageReference Include="QuestPDF" Version="2024.10.3" />
+
+    <!-- PDF reader (za ekstrakciju broja stranica i dimenzija) -->
+    <PackageReference Include="PdfPig" Version="0.1.9" />
+    <PackageReference Include="Velopack" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Resources (logo, ikona) -->
+    <Resource Include="Resources\logo.ico" />
+    <Resource Include="Resources\logo.png" Condition="Exists('Resources\logo.png')" />
+  </ItemGroup>
+
+</Project>

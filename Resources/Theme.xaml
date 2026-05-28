@@ -1,0 +1,269 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Boje (Rapido brand)
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <Color x:Key="BrandColor">#E85A1A</Color>
+    <Color x:Key="BrandHoverColor">#FF7A3D</Color>
+    <Color x:Key="BrandPressedColor">#C84A10</Color>
+    <Color x:Key="DangerColor">#c9bfbf</Color>
+    <Color x:Key="SuccessColor">#34C759</Color>
+    <Color x:Key="WhiteColor">#FFF1F0</Color>
+
+    <Color x:Key="BgColor">#F5F5F7</Color>
+    <Color x:Key="CardBgColor">#FFFFFF</Color>
+    <Color x:Key="BorderColor">#D1D1D6</Color>
+    <Color x:Key="TextColor">#2C2C2E</Color>
+    <Color x:Key="SecondaryTextColor">#6C6C70</Color>
+    <Color x:Key="MutedColor">#8E8E93</Color>
+
+    <SolidColorBrush x:Key="BrandBrush" Color="{StaticResource BrandColor}" />
+    <SolidColorBrush x:Key="BrandHoverBrush" Color="{StaticResource BrandHoverColor}" />
+    <SolidColorBrush x:Key="BrandPressedBrush" Color="{StaticResource BrandPressedColor}" />
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+    <SolidColorBrush x:Key="ButtonTextBrush" Color="{StaticResource WhiteColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
+    <SolidColorBrush x:Key="CardBgBrush" Color="{StaticResource CardBgColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{StaticResource SecondaryTextColor}" />
+    <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource MutedColor}" />
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Tipografija
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <FontFamily x:Key="AppFont">Segoe UI</FontFamily>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Stilovi kontrola
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- Default Window/Control stylinzi -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource BgBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <!-- ── Button ── -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush"
+                                    Value="{StaticResource BrandBrush}" />
+                            <Setter TargetName="border" Property="Background" Value="#F2F2F5" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#E5E5EA" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Primarni gumb (brand boja) -->
+    <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource BrandBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource BrandBrush}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ControlTemplate.Resources>
+                        <!-- Ovaj scoped stil override-a globalni TextBlock stil unutar ovog templatea -->
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+                            <Setter Property="FontSize" Value="13" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0"
+                            CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                    Value="{StaticResource BrandHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                    Value="{StaticResource BrandPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Opasni gumb (Obriši) -->
+    <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource DangerBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+    </Style>
+
+    <!-- Success gumb (Spremi kao PDF) -->
+    <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource SuccessBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SuccessBrush}" />
+    </Style>
+
+    <!-- ── TextBox / PasswordBox / ComboBox / DatePicker ── -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="ComboBox">
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="Padding" Value="6,2" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <!-- ── DataGrid ── -->
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#E5E5EA" />
+        <Setter Property="RowBackground" Value="White" />
+        <Setter Property="AlternatingRowBackground" Value="#FAFAFA" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="SelectionUnit" Value="FullRow" />
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="#F2F2F5" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="BorderBrush" Value="{StaticResource BrandBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#FFE4D4" />
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ── CheckBox ── -->
+    <Style TargetType="CheckBox">
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Padding" Value="4,0,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- ── GroupBox ── -->
+    <Style TargetType="GroupBox">
+        <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="Foreground" Value="{StaticResource BrandBrush}" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <!-- ── Label ── -->
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Padding" Value="0,4,8,4" />
+        <Setter Property="FontWeight" Value="Normal" />
+    </Style>
+
+    <!-- ── ToolBar ── -->
+    <Style TargetType="ToolBar">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+
+</ResourceDictionary>

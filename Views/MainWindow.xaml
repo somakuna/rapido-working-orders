@@ -1,0 +1,107 @@
+<Window x:Class="RapidoWorkingOrders.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rapido by ninaarm"
+        Width="1300" Height="720"
+        Icon="/Resources/logo.ico"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+        <!-- ── Toolbar ── -->
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar Loaded="ToolBar_Loaded">
+                <Button Content="➕  Novi nalog" Click="NewWork_Click"
+                        Padding="10,6" Margin="2" />
+                <Button Content="📋  Dupliciraj" Click="DuplicateWork_Click"
+                        Padding="10,6" Margin="2" />
+                <Separator />
+                <Button Content="👥  Klijenti" Click="OpenClients_Click"
+                        Padding="10,6" Margin="2" />
+                <Button Content="📦  Postavke"
+                        Click="OpenCatalog_Click" Padding="10,6" Margin="2" />
+                <Separator />
+                <Button Content="⚙️  MySQL postavke" Click="OpenDbSettings_Click"
+                        Padding="10,6" Margin="2" />
+                <Separator />
+                <Button Content="🔄  Osvježi" Click="RefreshWorks_Click"
+                        Padding="10,6" Margin="2" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- ── Status bar ── -->
+        <StatusBar DockPanel.Dock="Bottom" Background="White">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="Spreman."
+                           Foreground="{StaticResource SecondaryTextBrush}" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- ── Glavni sadržaj ── -->
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Filter -->
+            <DockPanel Grid.Row="0" Margin="0,0,0,10">
+                <Label Content="🔍 Filter:" FontWeight="Bold" DockPanel.Dock="Left"
+                       VerticalAlignment="Center" />
+                <TextBox x:Name="FilterBox" TextChanged="Filter_TextChanged"
+                         VerticalContentAlignment="Center" />
+            </DockPanel>
+
+            <!-- Tablica radnih naloga -->
+            <DataGrid x:Name="WorksGrid" Grid.Row="1"
+                      MouseDoubleClick="WorksGrid_DoubleClick"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      RowBackground="White"
+                      AlternatingRowBackground="#FFF8F5"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#F0F0F0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Broj naloga"
+                                        Binding="{Binding FormattedNumber}"
+                                        Width="120" />
+                    <DataGridTextColumn Header="Datum"
+                                        Binding="{Binding WorkDate, StringFormat='{}{0:d.M.yyyy}'}"
+                                        Width="100" />
+                    <DataGridTextColumn Header="Klijent"
+                                        Binding="{Binding Client.Name}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Datum narudžbe"
+                                        Binding="{Binding OrderDate, StringFormat='{}{0:d.M.yyyy}'}"
+                                        Width="130" />
+                    <DataGridTextColumn Header="Datum isporuke"
+                                        Binding="{Binding DeliveryDate, StringFormat='{}{0:d.M.yyyy}'}"
+                                        Width="130" />
+                    <DataGridTextColumn Header="Operater"
+                                        Binding="{Binding User.Name}"
+                                        Width="130" />
+                    <DataGridTextColumn Header="Lokacija"
+                                        Binding="{Binding Location}"
+                                        Width="200" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Gumbi za akcije ispod tablice -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="✏️  Uredi" Click="EditWork_Click"
+                        Padding="14,6" MinWidth="100" />
+                <Button Content="🖨️  Print" Click="PrintWork_Click"
+                        Padding="14,6" MinWidth="100" Margin="8,0,0,0" />
+                <Button Content="📋  Dupliciraj" Click="DuplicateWork_Click"
+                        Padding="14,6" MinWidth="120" Margin="8,0,0,0" />
+                <Border Width="1" Background="{StaticResource BorderBrush}"
+                        Margin="16,4" />
+                <Button Content="🗑️  Obriši" Click="DeleteWork_Click"
+                        Padding="14,6" MinWidth="100" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
