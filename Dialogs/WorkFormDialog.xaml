@@ -211,7 +211,7 @@
                                   CanUserAddRows="False"
                                   KeyDown="FilesGrid_KeyDown"
                                   ContextMenuOpening="FilesGrid_ContextMenuOpening"
-                                  SelectionMode="Single" SelectionUnit="FullRow"
+                                  SelectionMode="Extended" SelectionUnit="FullRow"
                                   RowBackground="White"
                                   AlternatingRowBackground="#FAFAFA"
                                   GridLinesVisibility="Horizontal"

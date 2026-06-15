@@ -9,7 +9,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Rapido</Authors>
     <Product>Rapido Working Orders</Product>
     <StartupObject>RapidoWorkingOrders.Program</StartupObject>

@@ -252,11 +252,11 @@ public partial class WorkFormDialog : Window
 
     private void RemoveRow_Click(object sender, RoutedEventArgs e)
     {
-        if (FilesGrid.SelectedItem is WorkFileRow row)
-        {
+        var toRemove = FilesGrid.SelectedItems.OfType<WorkFileRow>().ToList();
+        foreach (var row in toRemove)
             _files.Remove(row);
+        if (toRemove.Count > 0)
             UpdateTotals();
-        }
     }
 
     private void FilesGrid_ContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
@@ -266,9 +266,16 @@ public partial class WorkFormDialog : Window
             dep = System.Windows.Media.VisualTreeHelper.GetParent(dep);
 
         if (dep is System.Windows.Controls.DataGridRow dgRow)
-            dgRow.IsSelected = true;
+        {
+            if (!dgRow.IsSelected)
+                FilesGrid.SelectedItem = dgRow.Item;
+            if (FilesGrid.ContextMenu?.Items[0] is System.Windows.Controls.MenuItem menuDuplicate)
+                menuDuplicate.IsEnabled = FilesGrid.SelectedItems.Count == 1;
+        }
         else
+        {
             e.Handled = true;
+        }
     }
 
     private void DuplicateRow_Click(object sender, RoutedEventArgs e)
@@ -283,15 +290,14 @@ public partial class WorkFormDialog : Window
 
     private void FilesGrid_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Delete && FilesGrid.SelectedItem is WorkFileRow row
-            && FilesGrid.CurrentCell.Column is not null)
+        if (e.Key == Key.Delete && FilesGrid.CurrentCell.Column is not null && !FilesGrid.IsEditing())
         {
-            if (!FilesGrid.IsEditing())
-            {
+            var toRemove = FilesGrid.SelectedItems.OfType<WorkFileRow>().ToList();
+            foreach (var row in toRemove)
                 _files.Remove(row);
+            if (toRemove.Count > 0)
                 UpdateTotals();
-                e.Handled = true;
-            }
+            e.Handled = true;
         }
     }
 
