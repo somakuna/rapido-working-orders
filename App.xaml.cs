@@ -59,6 +59,7 @@ public partial class App : Application
         {
             using var db = new AppDbContext();
             db.Database.EnsureCreated();
+            db.EnsureFileLocationColumn();
 
             var winName = Environment.UserName;
             var user = db.Users.FirstOrDefault(u => u.WindowsName == winName);

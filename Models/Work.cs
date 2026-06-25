@@ -41,6 +41,9 @@ public class Work
     [Column("location", TypeName = "text")]
     public string? Location { get; set; }
 
+    [Column("file_location", TypeName = "text")]
+    public string? FileLocation { get; set; }
+
     // ── Foreign keys ──
     [Column("client_id")]
     public int? ClientId { get; set; }

@@ -90,6 +90,18 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
     }
 
+    public void EnsureFileLocationColumn()
+    {
+        try
+        {
+            Database.ExecuteSqlRaw("SELECT file_location FROM works LIMIT 0");
+        }
+        catch
+        {
+            Database.ExecuteSqlRaw("ALTER TABLE works ADD COLUMN file_location TEXT NULL");
+        }
+    }
+
     public int NextWorkNumber(int year)
     {
         var max = Works

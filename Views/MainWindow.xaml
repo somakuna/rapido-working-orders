@@ -4,27 +4,28 @@
         Title="Rapido by ninaarm"
         Width="1300" Height="720"
         Icon="/Resources/logo.ico"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Window_PreviewKeyDown">
 
     <DockPanel>
         <!-- ── Toolbar ── -->
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Loaded="ToolBar_Loaded">
                 <Button Content="➕  Novi nalog" Click="NewWork_Click"
-                        Padding="10,6" Margin="2" />
+                        Padding="10,6" Margin="2" ToolTip="Ctrl+N" />
                 <Button Content="📋  Dupliciraj" Click="DuplicateWork_Click"
-                        Padding="10,6" Margin="2" />
+                        Padding="10,6" Margin="2" ToolTip="Ctrl+D" />
                 <Separator />
                 <Button Content="👥  Klijenti" Click="OpenClients_Click"
-                        Padding="10,6" Margin="2" />
+                        Padding="10,6" Margin="2" ToolTip="Ctrl+K" />
                 <Button Content="📦  Postavke"
-                        Click="OpenCatalog_Click" Padding="10,6" Margin="2" />
+                        Click="OpenCatalog_Click" Padding="10,6" Margin="2" ToolTip="Ctrl+T" />
                 <Separator />
                 <Button Content="⚙️  MySQL postavke" Click="OpenDbSettings_Click"
-                        Padding="10,6" Margin="2" />
+                        Padding="10,6" Margin="2" ToolTip="Ctrl+M" />
                 <Separator />
                 <Button Content="🔄  Osvježi" Click="RefreshWorks_Click"
-                        Padding="10,6" Margin="2" />
+                        Padding="10,6" Margin="2" ToolTip="F5" />
             </ToolBar>
         </ToolBarTray>
 
@@ -55,6 +56,7 @@
             <!-- Tablica radnih naloga -->
             <DataGrid x:Name="WorksGrid" Grid.Row="1"
                       MouseDoubleClick="WorksGrid_DoubleClick"
+                      KeyDown="WorksGrid_KeyDown"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
                       CanUserAddRows="False"
@@ -92,15 +94,15 @@
             <!-- Gumbi za akcije ispod tablice -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
                 <Button Content="✏️  Uredi" Click="EditWork_Click"
-                        Padding="14,6" MinWidth="100" />
+                        Padding="14,6" MinWidth="100" ToolTip="Enter" />
                 <Button Content="🖨️  Print" Click="PrintWork_Click"
-                        Padding="14,6" MinWidth="100" Margin="8,0,0,0" />
+                        Padding="14,6" MinWidth="100" Margin="8,0,0,0" ToolTip="Ctrl+P" />
                 <Button Content="📋  Dupliciraj" Click="DuplicateWork_Click"
-                        Padding="14,6" MinWidth="120" Margin="8,0,0,0" />
+                        Padding="14,6" MinWidth="120" Margin="8,0,0,0" ToolTip="Ctrl+D" />
                 <Border Width="1" Background="{StaticResource BorderBrush}"
                         Margin="16,4" />
                 <Button Content="🗑️  Obriši" Click="DeleteWork_Click"
-                        Padding="14,6" MinWidth="100" />
+                        Padding="14,6" MinWidth="100" ToolTip="Del" />
             </StackPanel>
         </Grid>
     </DockPanel>

@@ -106,6 +106,7 @@ public partial class WorkFormDialog : Window
         WorkNumberBox.Text = number.ToString();
         WorkYearBox.Text   = year.ToString();
         WorkDatePicker.SelectedDate = DateTime.Today;
+        FileLocationBox.Text = DateTime.Today.ToString("yyyy-M-d");
 
         if (App.CurrentUser != null)
             UserCombo.SelectedValue = App.CurrentUser.Id;
@@ -121,9 +122,10 @@ public partial class WorkFormDialog : Window
         WorkDatePicker.SelectedDate     = w.WorkDate;
         OrderDatePicker.SelectedDate    = w.OrderDate;
         DeliveryDatePicker.SelectedDate = w.DeliveryDate;
-        OfferNumberBox.Text = w.OfferNumber?.ToString() ?? "";
-        LocationBox.Text    = w.Location ?? "";
-        DeliveryBox.Text    = w.Delivery ?? "";
+        OfferNumberBox.Text  = w.OfferNumber?.ToString() ?? "";
+        LocationBox.Text     = w.Location ?? "";
+        DeliveryBox.Text     = w.Delivery ?? "";
+        FileLocationBox.Text = w.FileLocation ?? "";
 
         SetComboByValue(OrderMethodCombo, w.OrderMethod);
         ClientCombo.SelectedValue = w.ClientId;
@@ -157,9 +159,10 @@ public partial class WorkFormDialog : Window
         WorkYearBox.Text   = year.ToString();
         WorkDatePicker.SelectedDate = DateTime.Today;
 
-        OfferNumberBox.Text = w.OfferNumber?.ToString() ?? "";
-        LocationBox.Text    = w.Location ?? "";
-        DeliveryBox.Text    = w.Delivery ?? "";
+        OfferNumberBox.Text  = w.OfferNumber?.ToString() ?? "";
+        LocationBox.Text     = w.Location ?? "";
+        DeliveryBox.Text     = w.Delivery ?? "";
+        FileLocationBox.Text = DateTime.Today.ToString("yyyy-M-d");
 
         SetComboByValue(OrderMethodCombo, w.OrderMethod);
         ClientCombo.SelectedValue = w.ClientId;
@@ -457,11 +460,44 @@ public partial class WorkFormDialog : Window
         w.DeliveryDate = DeliveryDatePicker.SelectedDate;
         w.Location     = NullIfEmpty(LocationBox.Text);
         w.Delivery     = NullIfEmpty(DeliveryBox.Text);
+        w.FileLocation = NullIfEmpty(FileLocationBox.Text);
         w.OfferNumber  = int.TryParse(OfferNumberBox.Text, out int on) ? on : null;
         w.OrderMethod  = GetComboText(OrderMethodCombo);
         w.ClientId     = ClientCombo.SelectedValue as int?;
         w.UserId       = UserCombo.SelectedValue as int?;
         w.UpdatedAt    = DateTime.Now;
+    }
+
+    // ──────────────────────────────────────────────────────────────────
+    // Tipkovničke kratice
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            switch (e.Key)
+            {
+                case Key.S: Save_Click(sender, e);        e.Handled = true; return;
+                case Key.P: SaveAndPrint_Click(sender, e); e.Handled = true; return;
+                case Key.N: AddRow_Click(sender, e);       e.Handled = true; return;
+                case Key.I: AddPdfFiles_Click(sender, e);  e.Handled = true; return;
+                case Key.D: DuplicateRow_Click(sender, e); e.Handled = true; return;
+            }
+            return;
+        }
+
+        if (Keyboard.Modifiers != ModifierKeys.None) return;
+
+        switch (e.Key)
+        {
+            case Key.F1: Cancel_Click(sender, e);          e.Handled = true; break;
+            case Key.F2: Save_Click(sender, e);            e.Handled = true; break;
+            case Key.F3: SaveAndPrint_Click(sender, e);    e.Handled = true; break;
+            case Key.F4: AddRow_Click(sender, e);          e.Handled = true; break;
+            case Key.F5: AddPdfFiles_Click(sender, e);     e.Handled = true; break;
+            case Key.F6: DuplicateRow_Click(sender, e);    e.Handled = true; break;
+            case Key.F7: RemoveRow_Click(sender, e);       e.Handled = true; break;
+        }
     }
 
     // ──────────────────────────────────────────────────────────────────

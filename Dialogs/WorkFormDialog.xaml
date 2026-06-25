@@ -4,7 +4,8 @@
         Title="Radni nalog"
         Width="1500" Height="900" MinWidth="1000" MinHeight="800"
         WindowStartupLocation="CenterOwner"
-        Icon="/Resources/logo.ico">
+        Icon="/Resources/logo.ico"
+        PreviewKeyDown="Window_PreviewKeyDown">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -48,6 +49,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
                                     <RowDefinition Height="Auto" />
@@ -133,6 +136,12 @@
                                 <StackPanel Grid.Row="8" Grid.Column="2">
                                     <TextBlock Text="Isporuka" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
                                     <TextBox x:Name="DeliveryBox" />
+                                </StackPanel>
+
+                                <!-- Row 10: Mjesto datoteka (puno širine) -->
+                                <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3">
+                                    <TextBlock Text="Mjesto datoteka" FontSize="11" Foreground="#888" Margin="0,0,0,3" />
+                                    <TextBox x:Name="FileLocationBox" />
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
@@ -338,13 +347,17 @@
 
                         <!-- Akcije za stavke -->
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
-                            <Button Content="➕  Dodaj red" Click="AddRow_Click" Padding="10,6" />
+                            <Button Content="➕  Dodaj red" Click="AddRow_Click" Padding="10,6"
+                                    ToolTip="(F4) Ctrl+N" />
                             <Button Content="📂  Dodaj PDF-ove" Click="AddPdfFiles_Click"
-                                    Padding="10,6" Margin="8,0,0,0" />
+                                    Padding="10,6" Margin="8,0,0,0"
+                                    ToolTip="(F5) Ctrl+I" />
                             <Button Content="📋  Dupliciraj stavku" Click="DuplicateRow_Click"
-                                    Padding="10,6" Margin="8,0,0,0" />
+                                    Padding="10,6" Margin="8,0,0,0"
+                                    ToolTip="(F6) Ctrl+D" />
                             <Button Content="🗑️  Ukloni red" Click="RemoveRow_Click"
-                                    Padding="10,6" Margin="8,0,0,0" />
+                                    Padding="10,6" Margin="8,0,0,0"
+                                    ToolTip="(F7) Del" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -367,13 +380,16 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Button Content="Odustani" Click="Cancel_Click"
-                            Padding="14,7" MinWidth="100" />
+                            Padding="14,7" MinWidth="100" IsCancel="True"
+                            ToolTip="(F1) Esc" />
                     <Button Content="💾  Spremi" Click="Save_Click"
                             Style="{StaticResource PrimaryButton}"
-                            Padding="14,7" MinWidth="110" Margin="10,0,0,0" />
+                            Padding="14,7" MinWidth="110" Margin="10,0,0,0"
+                            ToolTip="(F2) Ctrl+S" />
                     <Button Content="💾  Spremi i Print" Click="SaveAndPrint_Click"
                             Style="{StaticResource PrimaryButton}"
-                            Padding="14,7" MinWidth="140" Margin="8,0,0,0" />
+                            Padding="14,7" MinWidth="140" Margin="8,0,0,0"
+                            ToolTip="(F3) Ctrl+P" />
                 </StackPanel>
             </Grid>
         </Border>

@@ -107,6 +107,15 @@ public static class WorkOrderPdfGenerator
                 });
             });
 
+            if (!string.IsNullOrWhiteSpace(work.FileLocation))
+            {
+                col.Item().PaddingBottom(4).Row(r =>
+                {
+                    r.ConstantItem(90).Text(t => { t.DefaultTextStyle(s => s.Bold()); t.Span("Mjesto datoteka:"); });
+                    r.RelativeItem().Text(work.FileLocation);
+                });
+            }
+
             var finishingNames = GetFinishingNames(work);
             if (finishingNames.Count > 0)
             {

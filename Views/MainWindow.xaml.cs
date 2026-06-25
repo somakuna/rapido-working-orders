@@ -299,6 +299,44 @@ public partial class MainWindow : Window
         EditWork_Click(sender, e);
     }
 
+    private void WorksGrid_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter)
+        {
+            EditWork_Click(sender, e);
+            e.Handled = true;
+        }
+        else if (e.Key == System.Windows.Input.Key.Delete)
+        {
+            DeleteWork_Click(sender, e);
+            e.Handled = true;
+        }
+    }
+
+    private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        var mods = System.Windows.Input.Keyboard.Modifiers;
+
+        if (mods == System.Windows.Input.ModifierKeys.None && e.Key == System.Windows.Input.Key.F5)
+        {
+            RefreshWorks_Click(sender, e);
+            e.Handled = true;
+            return;
+        }
+
+        if (mods != System.Windows.Input.ModifierKeys.Control) return;
+
+        switch (e.Key)
+        {
+            case System.Windows.Input.Key.N: NewWork_Click(sender, e);        e.Handled = true; break;
+            case System.Windows.Input.Key.D: DuplicateWork_Click(sender, e);  e.Handled = true; break;
+            case System.Windows.Input.Key.P: PrintWork_Click(sender, e);      e.Handled = true; break;
+            case System.Windows.Input.Key.K: OpenClients_Click(sender, e);    e.Handled = true; break;
+            case System.Windows.Input.Key.T: OpenCatalog_Click(sender, e);    e.Handled = true; break;
+            case System.Windows.Input.Key.M: OpenDbSettings_Click(sender, e); e.Handled = true; break;
+        }
+    }
+
     private void OpenClients_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new ClientsDialog { Owner = this };
