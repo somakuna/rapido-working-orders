@@ -190,8 +190,8 @@ public partial class MainWindow : Window
     private void NewWork_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new WorkFormDialog { Owner = this };
-        if (dlg.ShowDialog() is true)
-            ReloadWorks();
+        dlg.Closed += (_, _) => { if (dlg.SavedWorkId > 0) ReloadWorks(); };
+        dlg.Show();
     }
 
     private void EditWork_Click(object sender, RoutedEventArgs e)
@@ -206,8 +206,8 @@ public partial class MainWindow : Window
                 fullWork = db.Works.First(w => w.Id == work.Id);
 
             var dlg = new WorkFormDialog(fullWork) { Owner = this };
-            if (dlg.ShowDialog() is true)
-                ReloadWorks();
+            dlg.Closed += (_, _) => { if (dlg.SavedWorkId > 0) ReloadWorks(); };
+            dlg.Show();
         }
         catch (Exception ex)
         {
@@ -228,8 +228,8 @@ public partial class MainWindow : Window
                 fullWork = db.Works.First(w => w.Id == work.Id);
 
             var dlg = new WorkFormDialog(fullWork, isDuplicate: true) { Owner = this };
-            if (dlg.ShowDialog() is true)
-                ReloadWorks();
+            dlg.Closed += (_, _) => { if (dlg.SavedWorkId > 0) ReloadWorks(); };
+            dlg.Show();
         }
         catch (Exception ex)
         {

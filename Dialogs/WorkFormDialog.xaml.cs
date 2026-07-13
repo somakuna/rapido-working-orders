@@ -322,7 +322,6 @@ public partial class WorkFormDialog : Window
 
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
-        DialogResult = false;
         Close();
     }
 
@@ -330,8 +329,7 @@ public partial class WorkFormDialog : Window
     {
         if (TrySave(out int savedId))
         {
-            SavedWorkId  = savedId;
-            DialogResult = true;
+            SavedWorkId = savedId;
             Close();
         }
     }
@@ -367,7 +365,6 @@ public partial class WorkFormDialog : Window
                 "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        DialogResult = true;
         Close();
     }
 
