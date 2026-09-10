@@ -94,7 +94,7 @@ public class WorkFileRow : INotifyPropertyChanged
     public string TechnologyName => AllTechs.FirstOrDefault(t => t.Id == TechnologyId)?.Name ?? "";
     public string MaterialName   => AllMats.FirstOrDefault(m => m.Id == MaterialId)?.Name ?? "";
 
-    private void Recalc() => TotalM2 = Math.Round(M2 * Amount, 2);
+    private void Recalc() => TotalM2 = Math.Round(M2 * Amount, 4);
 
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnProp(string n) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));

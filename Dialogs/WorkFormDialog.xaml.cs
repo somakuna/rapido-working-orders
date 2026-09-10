@@ -240,7 +240,7 @@ public partial class WorkFormDialog : Window
             TechnologyId = kw?.TechnologyId,
             MaterialId   = kw?.MaterialId,
         };
-        row.TotalM2 = row.M2 * row.Amount;
+        row.TotalM2 = Math.Round(row.M2 * row.Amount, 4);
         _files.Add(row);
         UpdateTotals();
     }
@@ -312,9 +312,9 @@ public partial class WorkFormDialog : Window
         decimal totalTotal = _files.Sum(f => f.TotalM2);
 
         TotalPagesText.Text   = totalPages.ToString();
-        TotalM2Text.Text      = totalM2.ToString("F2");
+        TotalM2Text.Text      = totalM2.ToString("F4");
         TotalAmountText.Text  = totalAmt.ToString("F3");
-        TotalTotalM2Text.Text = totalTotal.ToString("F2");
+        TotalTotalM2Text.Text = totalTotal.ToString("F3");
     }
 
     // ──────────────────────────────────────────────────────────────────

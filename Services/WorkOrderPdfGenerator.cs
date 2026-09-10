@@ -185,9 +185,9 @@ public static class WorkOrderPdfGenerator
                         DataCell(table, f.Material?.Name ?? "", false, a5);
                         DataCell(table, f.Note ?? "", false, a5);
                         DataCell(table, f.PageCount.ToString(), true, a5);
-                        DataCell(table, f.M2.ToString("F2"), true, a5);
+                        DataCell(table, f.M2.ToString("F4"), true, a5);
                         DataCell(table, f.Amount.ToString("F3"), true, a5);
-                        DataCell(table, f.TotalM2.ToString("F2"), true, a5);
+                        DataCell(table, f.TotalM2.ToString("F3"), true, a5);
                     }
 
                     int     totalPages = files.Sum(f => f.PageCount);
@@ -200,7 +200,7 @@ public static class WorkOrderPdfGenerator
                     DataCellBold(table, totalPages.ToString(), true, a5);
                     table.Cell().BorderBottom(1).BorderColor(BorderGray).Padding(4).Text("");
                     DataCellBold(table, totalAmt.ToString("F3"), true, a5);
-                    DataCellBold(table, totalM2.ToString("F2"),  true, a5);
+                    DataCellBold(table, totalM2.ToString("F3"),  true, a5);
                 });
             }
         });

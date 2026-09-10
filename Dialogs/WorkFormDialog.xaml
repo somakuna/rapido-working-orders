@@ -287,7 +287,7 @@
                                                     Width="48" />
 
                                 <DataGridTextColumn Header="m²"
-                                                    Binding="{Binding M2, StringFormat=F2, UpdateSourceTrigger=LostFocus}"
+                                                    Binding="{Binding M2, StringFormat=F4, UpdateSourceTrigger=LostFocus}"
                                                     Width="70" />
 
                                 <DataGridTextColumn Header="Kol."
@@ -295,7 +295,7 @@
                                                     Width="60" />
 
                                 <DataGridTextColumn Header="Uk.m²"
-                                                    Binding="{Binding TotalM2, StringFormat=F2}"
+                                                    Binding="{Binding TotalM2, StringFormat=F3}"
                                                     Width="76" IsReadOnly="True" />
 
                             </DataGrid.Columns>
@@ -328,7 +328,7 @@
                                            VerticalAlignment="Center" />
 
                                 <TextBlock Grid.Column="5" x:Name="TotalM2Text"
-                                           Text="0.00" FontWeight="Bold" FontSize="11"
+                                           Text="0.0000" FontWeight="Bold" FontSize="11"
                                            TextAlignment="Right" Padding="0,5,4,5"
                                            VerticalAlignment="Center" />
 
@@ -338,7 +338,7 @@
                                            VerticalAlignment="Center" />
 
                                 <TextBlock Grid.Column="7" x:Name="TotalTotalM2Text"
-                                           Text="0.00" FontWeight="Bold" FontSize="11"
+                                           Text="0.000" FontWeight="Bold" FontSize="11"
                                            TextAlignment="Right" Padding="0,5,4,5"
                                            Foreground="{StaticResource BrandBrush}"
                                            VerticalAlignment="Center" />

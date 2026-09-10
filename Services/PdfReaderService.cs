@@ -27,7 +27,7 @@ public static class PdfReaderService
                 double h = page.Height * PtToM;
                 totalM2 += (decimal)(w * h);
             }
-            return (count, Math.Round(totalM2, 2));
+            return (count, Math.Round(totalM2, 4));
         }
         catch
         {
