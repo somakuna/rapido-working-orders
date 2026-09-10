@@ -191,6 +191,14 @@ Ta linija mora ostati prije svega ostalog — obrađuje install/update/uninstall
 
 ## 5. Gotchas
 
+**`vpk` nije na PATH-u u neinteraktivnim ljuskama** (skripte, CI, agentski terminali) —
+`dotnet tool` PATH unos se učita tek u interaktivnoj sesiji. Zovi ga punom putanjom:
+
+```powershell
+$vpk = Join-Path $env:USERPROFILE ".dotnet\tools\vpk.exe"
+& $vpk pack -u RapidoWorkingOrders -v 1.0.5 ...
+```
+
 **Git push preko HTTPS traži token u ispravnom formatu.**
 Goli PAT kao username daje `Password authentication not supported`. Koristi:
 
